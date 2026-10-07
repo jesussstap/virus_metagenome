@@ -41,7 +41,8 @@ graph TD
     
     Q --> R[Host-Virus Network Graphs]
     Q --> S[Taxonomic Sankey Diagrams]
-    Q --> T[Ecological Statistics NMDS/IndVal] ´´
+    Q --> T[Ecological Statistics NMDS/IndVal]
+``` 
 
 ## 1. Viral Discovery & Quality Control
 Run the consensus discovery tools on your assembled contigs. Merge the outputs and evaluate viral quality using CheckV.
