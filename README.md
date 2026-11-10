@@ -11,46 +11,46 @@ The pipeline consists of modular steps, going from raw assemblies to publication
 ```mermaid
 graph TD
     %% Estilos de nodos
-    classDef process fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef filter fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef output fill:#bfb,stroke:#333,stroke-width:2px;
-    classDef rscript fill:#ff9,stroke:#333,stroke-width:2px;
+    classDef process fill:#f9f,stroke:#333,stroke-width:2px
+    classDef filterNode fill:#bbf,stroke:#333,stroke-width:2px
+    classDef outputNode fill:#bfb,stroke:#333,stroke-width:2px
+    classDef rscript fill:#ff9,stroke:#333,stroke-width:2px
 
     %% 1. ENTRADA DE DATOS
     A[Metagenomic Assemblies / Raw Data] --> B(Viral Discovery Pipeline)
     A --> C(MAG Binning Pipeline)
     
     %% 2. FILTRADO Y DESCUBRIMIENTO VIRAL
-    B -->|geNomad, VirSorter2, VIBRANT| D[Putative Viral Contigs]
+    B -->|"geNomad, VirSorter2, VIBRANT"| D[Putative Viral Contigs]
     D --> F{CheckV Quality Filter}
-    F -->|>= 5kb & Contig Quality| G[Filtered Viral Contigs]
+    F -->|">= 5kb & Contig Quality"| G[Filtered Viral Contigs]
     
     %% INCLUSIÓN DE VRHYME
     G --> V[vRhyme: Viral Binning & vMAG Reconstruction]
     V --> W[Linked vMAGs & Unbinned Contigs]
     W --> CheckV2{CheckV End-to-End Quality Check}
-    CheckV2 -->|Completeness / Quality Assessment| H_vOTU[Dereplication & Final vOTUs]
+    CheckV2 -->|"Completeness / Quality Assessment"| H_vOTU[Dereplication & Final vOTUs]
 
     %% 3. PROCESAMIENTO DE HOST MAGs
-    C -->|metaBAT2, VAMB, etc.| E[Raw MAGs]
+    C -->|"metaBAT2, VAMB, etc"| E[Raw MAGs]
     E --> H{CheckM2 Filter}
-    H -->|Completeness >=50%, Contamination <=10%| I[High-Quality MAGs]
+    H -->|"Completeness >= 50, Contamination <= 10"| I[High-Quality MAGs]
     I --> J(Taxonomic Classification: GTDB-Tk)
 
     %% 4. ANOTACIÓN FUNCIONAL (DRAM-V)
     H_vOTU --> DRAM[DRAM-v: Functional & AMG Annotation]
-    DRAM --> AMGs[Verified Auxiliary Metabolic Genes / AMGs: phoH, Sulfur, Nucleotides]
+    DRAM --> AMGs["Verified AMGs: phoH, Sulfur, Nucleotides"]
 
     %% 5. ABUNDANCIA E INTERACCIONES
     H_vOTU --> K(Abundance Quantification)
     I --> K
-    K -->|CoverM TPM (Lane Averaging)| L[Robust Abundance Matrix]
+    K -->|"CoverM TPM (Lane Averaging)"| L[Robust Abundance Matrix]
 
     H_vOTU --> M(Host-Virus Network Discovery)
     I --> M
     M -->|MinCED| N[CRISPR Spacers]
     M -->|BLASTn| O[Provirus Integration / Homology]
-    M -->|iPHoP v1.4.2| P[Machine Learning Host Prediction]
+    M -->|"iPHoP v1.4.2"| P[Machine Learning Host Prediction]
 
     %% 6. INTEGRACIÓN Y ESTADÍSTICAS EN R
     L --> Q((Master R Script))
@@ -61,15 +61,15 @@ graph TD
     AMGs --> Q
 
     %% 7. PRODUCTOS Y RESULTADOS VISUALES
-    Q --> R[Host-Virus Interaction Networks & VHR Analysis]
-    Q --> S[Taxonomic & Genomic Architecture Panels]
-    Q --> T[Ecological Statistics: PERMANOVA, PERMDISP, NMDS & PCoA]
-    Q --> U[AMG Functional Profiles & Bubble Heatmaps]
+    Q --> R["Host-Virus Interaction Networks & VHR Analysis"]
+    Q --> S["Taxonomic & Genomic Architecture Panels"]
+    Q --> T["Ecological Statistics: PERMANOVA, PERMDISP, NMDS & PCoA"]
+    Q --> U["AMG Functional Profiles & Bubble Heatmaps"]
 
     %% Aplicación de clases
-    class F,H,CheckV2 filter;
-    class H_vOTU,L,AMGs output;
-    class Q rscript;
+    class F,H,CheckV2 filterNode
+    class H_vOTU,L,AMGs outputNode
+    class Q rscript
 ``` 
 
 ## 1. Viral Discovery & Quality Control
