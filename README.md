@@ -10,11 +10,11 @@ The pipeline consists of modular steps, going from raw assemblies to publication
 
 ```mermaid
 graph TD
-    %% Estilos de nodos
-    classDef process fill:#f9f,stroke:#333,stroke-width:2px
-    classDef filterNode fill:#bbf,stroke:#333,stroke-width:2px
-    classDef outputNode fill:#bfb,stroke:#333,stroke-width:2px
-    classDef rscript fill:#ff9,stroke:#333,stroke-width:2px
+    %% Estilos de nodos (Paleta sobria y profesional para póster / fondo blanco)
+    classDef process fill:#F8FAFC,stroke:#334155,stroke-width:1.5px,color:#0F172A
+    classDef filterNode fill:#E0F2FE,stroke:#0369A1,stroke-width:1.5px,color:#0C4A6E
+    classDef outputNode fill:#DCFCE7,stroke:#15803D,stroke-width:1.5px,color:#14532D
+    classDef rscript fill:#FEF3C7,stroke:#B45309,stroke-width:1.5px,color:#78350F
 
     %% 1. ENTRADA DE DATOS
     A[Metagenomic Assemblies / Raw Data] --> B(Viral Discovery Pipeline)
@@ -34,12 +34,12 @@ graph TD
     %% 3. PROCESAMIENTO DE HOST MAGs
     C -->|"metaBAT2, VAMB, etc"| E[Raw MAGs]
     E --> H{CheckM2 Filter}
-    H -->|"Completeness >= 50, Contamination <= 10"| I[High-Quality MAGs]
+    H -->|"Completeness >= 90, Contamination <= 5"| I[High-Quality MAGs]
     I --> J(Taxonomic Classification: GTDB-Tk)
 
     %% 4. ANOTACIÓN FUNCIONAL (DRAM-V)
     H_vOTU --> DRAM[DRAM-v: Functional & AMG Annotation]
-    DRAM --> AMGs["Verified AMGs: phoH, Sulfur, Nucleotides"]
+    DRAM-V --> AMGs["Distill AMGs"]
 
     %% 5. ABUNDANCIA E INTERACCIONES
     H_vOTU --> K(Abundance Quantification)
@@ -49,7 +49,7 @@ graph TD
     H_vOTU --> M(Host-Virus Network Discovery)
     I --> M
     M -->|MinCED| N[CRISPR Spacers]
-    M -->|BLASTn| O[Provirus Integration / Homology]
+    M -->|BLASTn| O[Integration / Homology]
     M -->|"iPHoP v1.4.2"| P[Machine Learning Host Prediction]
 
     %% 6. INTEGRACIÓN Y ESTADÍSTICAS EN R
@@ -63,8 +63,8 @@ graph TD
     %% 7. PRODUCTOS Y RESULTADOS VISUALES
     Q --> R["Host-Virus Interaction Networks & VHR Analysis"]
     Q --> S["Taxonomic & Genomic Architecture Panels"]
-    Q --> T["Ecological Statistics: PERMANOVA, PERMDISP, NMDS & PCoA"]
-    Q --> U["AMG Functional Profiles & Bubble Heatmaps"]
+    Q --> T["Ecological Statistics"]
+    Q --> U["AMG Functional Profiles"]
 
     %% Aplicación de clases
     class F,H,CheckV2 filterNode
