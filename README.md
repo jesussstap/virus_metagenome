@@ -90,7 +90,6 @@ cd virus_metagenome
 Then, recreate the required Conda environments using the YAML files provided in the envs/ directory:
 
 ```bash
-cd envs
 # Environment for viral database compilation and CheckV quality control
 conda env create -f envs/vrhyme_env.yml
 
@@ -109,7 +108,6 @@ Follow these steps to set up the environments and run the pipeline scripts seque
 
 ```bash
 #Go to codes folder
-cd ..
 cd codes
 conda activate checkv
 bash viral_database.sh
