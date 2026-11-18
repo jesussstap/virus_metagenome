@@ -1,8 +1,8 @@
-# Viral Metagenomics & Host-Virus Interaction Pipeline 🦠🧬
+# Viral Metagenomics & Host-Virus Interaction discovery from bulk metagenomes 🦠🧬
 
-A comprehensive and highly robust pipeline for viral discovery, quality control, abundance quantification, and host-virus interaction network reconstruction from metagenomic assemblies. Developed for **EliLab**.
+A comprehensive and highly robust pipeline for viral discovery, quality control, abundance quantification, and host-virus interaction network reconstruction from metagenomic assemblies.
 
-This workflow integrates state-of-the-art tools to reliably identify viral contigs, pair them with their bacterial/archaeal hosts using both empirical (CRISPR/BLAST) and machine-learning (iPHoP) evidence, and visualize the complex ecological dynamics of the community.
+This workflow integrates state-of-the-art tools to reliably identify viral fraction, pair them with their bacterial/archaeal hosts using both empirical (CRISPR/BLAST) and machine-learning (iPHoP) evidence, and visualize the complex ecological dynamics of the community.
 
 ## 📊 Pipeline Workflow
 
@@ -77,10 +77,10 @@ Run the consensus discovery tools on your assembled contigs. Merge the outputs a
 The master R scripts apply a strict filter to retain only Medium-quality, High-quality, and Complete viral genomes that are >= 5,000 bp (5 kb), adhering to MIUViG standards to prevent false positives from small fragments.
 
 ## 2. MAG Quality & Taxonomy
-Evaluate MAGs using CheckM2. The pipeline automatically filters MAGs retaining those with >=50% completeness and <=10% contamination. Ensure taxonomy is assigned using GTDB-Tk (the R scripts are pre-configured to parse KBase GTDB CSV outputs).
+Evaluate MAGs using CheckM2. The pipeline automatically filters MAGs retaining those with >=90% completeness and <=5% contamination. Ensure taxonomy is assigned using GTDB-Tk (the R scripts are pre-configured to parse KBase GTDB CSV outputs).
 
 ## 3. Abundance Calculation (CoverM)
-Generate a unified reference catalog containing both validated MAGs and vOTUs. Map clean reads back to this catalog using CoverM to calculate Trimmed Mean (TPM) values for the entire community simultaneously.
+Generate a unified reference catalog containing both validated MAGs and vOTUs. Map clean reads back to this catalog using CoverM to calculate Transcripts Per Million (TPM) values for the entire community simultaneously.
 
 Crucial Step: Ensure MAG contigs are prepended with their MAG ID and the ___ separator (e.g., MAG_001___NODE_1) before mapping so the R script can accurately aggregate contig abundances into total host abundance.
 
