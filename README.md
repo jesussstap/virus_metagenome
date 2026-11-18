@@ -107,9 +107,7 @@ The master R scripts apply a strict filter to retain only Medium-quality, High-q
 Follow these steps to set up the environments and run the pipeline scripts sequentially.
 
 ```bash
-conda activate vrhyme_env
-cd virus_metagenome
-
+conda activate checkv
 bash viral_database.sh
 ```
 
@@ -117,7 +115,7 @@ bash viral_database.sh
 Execute the binning and sequence consolidation steps using vRhyme to reconstruct viral Metagenome-Assembled Genomes (vMAGs) from coverage profiles and genomic signatures:
 
 ```bash
-conda activate coverm
+conda activate vrhyme_env
 bash vMAGs_construction.sh
 ```
 
@@ -130,7 +128,7 @@ Generate a unified reference catalog containing both validated MAGs and vOTUs. M
 Crucial Step: Ensure MAG contigs are prepended with their MAG ID and the ___ separator (e.g., MAG_001___NODE_1) before mapping so the R script can accurately aggregate contig abundances into total host abundance.
 
 ```bash
-conda activate minced_blast
+conda activate coverm
 community_abundance.sh
 ```
 
@@ -144,6 +142,7 @@ Provirus (BLAST): Identify viral sequences integrated directly into host contigs
 Machine Learning (iPHoP): Predict host-virus pairs based on genomic signatures.
 
 ```bash
+conda activate minced_blast
 minced_blast.sh
 ```
 
