@@ -75,6 +75,9 @@ graph TD
 ## 1. Viral Discovery & Quality Control
 Run the consensus discovery tools on your assembled contigs. Merge the outputs and evaluate viral quality using CheckV.
 The master R scripts apply a strict filter to retain only Medium-quality, High-quality, and Complete viral genomes that are >= 5,000 bp (5 kb), adhering to MIUViG standards to prevent false positives from small fragments.
+```bash
+bash viral_database.sh
+```
 
 ## 2. vMAGs Construction
 Execute the binning and sequence consolidation steps using vRhyme to reconstruct viral Metagenome-Assembled Genomes (vMAGs) from coverage profiles and genomic signatures:
