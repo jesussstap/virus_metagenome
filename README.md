@@ -1,12 +1,12 @@
 # Viral Metagenomics & Host-Virus Interaction discovery from bulk metagenomes
 
-A comprehensive and highly robust pipeline for viral discovery, quality control, abundance quantification, and host-virus interaction network reconstruction from metagenomic assemblies.
+<div align="center">
+  <img src="./assets/ELI_Square.png" alt="EliLab Logo" width="220px">
+</div>
+
+A comprehensive pipeline for viral discovery, quality control, abundance quantification, and host-virus interaction network reconstruction from metagenomic assemblies.
 
 This workflow integrates state-of-the-art tools to reliably identify viral fraction, pair them with their bacterial/archaeal hosts using both empirical (CRISPR/BLAST) and machine-learning (iPHoP) evidence, and visualize the complex ecological dynamics of the community.
-
-<div align="center">
-  <img src="./assets/ELI_Square.png" alt="EliLab Logo" width="250px">
-</div>
 
 ## Pipeline Workflow
 
@@ -78,16 +78,27 @@ graph TD
 ``` 
 
 
-## 1 Dependencies instalation 
+## 1 Installation & Environment Setup
+To ensure complete reproducibility, all software dependencies are isolated into modular Conda environments. First, clone the repository to your local machine or server:
+
 ```bash
 git clone [https://github.com/jesussstap/virus_metagenome.git](https://github.com/jesussstap/virus_metagenome.git)
-cd virus_metagenome
-conda env create -f envs/vrhyme_env.yml
-conda env create -f envs/coverm.yml.yml
-conda env create -f envs/minced_blast.yml
 
+cd virus_metagenome
 ```
 
+Then, recreate the required Conda environments using the YAML files provided in the envs/ directory:
+
+```bash
+# Environment for viral database compilation and CheckV quality control
+conda env create -f envs/vrhyme_env.yml
+
+# Environment for read mapping and abundance quantification (CoverM)
+conda env create -f envs/coverm.yml.yml
+
+# Environment for CRISPR spacing (MinCED) and proviral BLAST parsing
+conda env create -f envs/minced_blast.yml
+```
 
 ## 2. Viral Discovery & Quality Control
 Run the consensus discovery tools on your assembled contigs. Merge the outputs and evaluate viral quality using CheckV.
@@ -96,7 +107,7 @@ The master R scripts apply a strict filter to retain only Medium-quality, High-q
 Follow these steps to set up the environments and run the pipeline scripts sequentially.
 
 ```bash
-conda activate vrhyme
+conda activate vrhyme_env
 cd virus_metagenome
 
 bash viral_database.sh
@@ -106,6 +117,7 @@ bash viral_database.sh
 Execute the binning and sequence consolidation steps using vRhyme to reconstruct viral Metagenome-Assembled Genomes (vMAGs) from coverage profiles and genomic signatures:
 
 ```bash
+conda activate coverm
 bash vMAGs_construction.sh
 ```
 
@@ -118,6 +130,7 @@ Generate a unified reference catalog containing both validated MAGs and vOTUs. M
 Crucial Step: Ensure MAG contigs are prepended with their MAG ID and the ___ separator (e.g., MAG_001___NODE_1) before mapping so the R script can accurately aggregate contig abundances into total host abundance.
 
 ```bash
+conda activate minced_blast
 community_abundance.sh
 ```
 
