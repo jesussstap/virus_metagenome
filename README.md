@@ -1,10 +1,10 @@
-# Viral Metagenomics & Host-Virus Interaction discovery from bulk metagenomes 🦠🧬
+# Viral Metagenomics & Host-Virus Interaction discovery from bulk metagenomes
 
 A comprehensive and highly robust pipeline for viral discovery, quality control, abundance quantification, and host-virus interaction network reconstruction from metagenomic assemblies.
 
 This workflow integrates state-of-the-art tools to reliably identify viral fraction, pair them with their bacterial/archaeal hosts using both empirical (CRISPR/BLAST) and machine-learning (iPHoP) evidence, and visualize the complex ecological dynamics of the community.
 
-## 📊 Pipeline Workflow
+## Pipeline Workflow
 
 The pipeline consists of modular steps, going from raw assemblies to publication-ready visualizations.
 
