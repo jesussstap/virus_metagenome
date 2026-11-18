@@ -95,7 +95,7 @@ cd envs
 conda env create -f envs/vrhyme_env.yml
 
 # Environment for read mapping and abundance quantification (CoverM)
-conda env create -f envs/coverm.yml.yml
+conda env create -f envs/coverm.yml
 
 # Environment for CRISPR spacing (MinCED) and proviral BLAST parsing
 conda env create -f envs/minced_blast.yml
