@@ -5,7 +5,7 @@ A comprehensive and highly robust pipeline for viral discovery, quality control,
 This workflow integrates state-of-the-art tools to reliably identify viral fraction, pair them with their bacterial/archaeal hosts using both empirical (CRISPR/BLAST) and machine-learning (iPHoP) evidence, and visualize the complex ecological dynamics of the community.
 
 <div align="center">
-  <img src="./assets/ELi_Square.png" alt="EliLab Logo" width="250px">
+  <img src="./assets/ELI_Square.png" alt="EliLab Logo" width="250px">
 </div>
 
 ## Pipeline Workflow
