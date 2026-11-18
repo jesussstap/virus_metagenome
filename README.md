@@ -94,6 +94,10 @@ Generate a unified reference catalog containing both validated MAGs and vOTUs. M
 
 Crucial Step: Ensure MAG contigs are prepended with their MAG ID and the ___ separator (e.g., MAG_001___NODE_1) before mapping so the R script can accurately aggregate contig abundances into total host abundance.
 
+```bash
+community_abundance.sh
+```
+
 ## 5. Host-Virus Interactions
 Run the three pillars of interaction prediction:
 
@@ -102,6 +106,10 @@ CRISPR (MinCED): Extract spacers from MAGs and map them against the viral catalo
 Provirus (BLAST): Identify viral sequences integrated directly into host contigs.
 
 Machine Learning (iPHoP): Predict host-virus pairs based on genomic signatures.
+
+```bash
+minced_blast.sh
+```
 
 ## 6. Visualization & Statistics (Master R Scripts)
 The repository contains standalone R scripts that merge all the above outputs, handle naming inconsistencies (automatically translating contigs to MAGs using a dictionary), and generate publication-ready plots:
